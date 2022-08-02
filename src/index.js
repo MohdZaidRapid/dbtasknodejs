@@ -57,6 +57,27 @@ app.post("/tasks", (req, res) => {
     });
 });
 
+app.get("/tasks", (req, res) => {
+  Task.find({})
+    .then((tasks) => {
+      res.status(201).send(tasks);
+    })
+    .catch((e) => {
+      res.status(500).send(e);
+    });
+});
+
+app.get("/tasks/:id", (req, res) => {
+  const _id = req.params.id;
+  Task.findById(_id)
+    .then((task) => {
+      res.status(201).send(task);
+    })
+    .catch((e) => {
+      res.status(500).send(e);
+    });
+});
+
 app.listen(port, () => {
   console.log("Server is up on port" + port);
 });
