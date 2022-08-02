@@ -15,16 +15,5 @@ MongoClient.connect(
     // console.log("Connected correctly!");
 
     const db = client.db(databaseName);
-
-    db.collection("users")
-      .find({ age: 27 })
-      .toArray((error, users) => {
-        console.log(users);
-      });
-    db.collection("users")
-      .find({ age: 27 })
-      .count((error, count) => {
-        console.log(count);
-      });
   }
 );
