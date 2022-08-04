@@ -18,10 +18,22 @@ router.post("/tasks", auth, async (req, res) => {
   }
 });
 
+// GET /tasks?completed=true
+
 router.get("/tasks", auth, async (req, res) => {
+  const match = {};
+  if (req.query.completed) {
+    match.completed = req.query.completed === "true";
+  }
+  req.query.completed;
   try {
     // const tasks = await Task.find({ owner: req.user._id });
-    await req.user.populate("tasks").execPopulate();
+    await req.user
+      .populate({
+        path: "tasks",
+        match,
+      })
+      .execPopulate();
     res.status(200).send(req.user.tasks);
   } catch (e) {
     res.status(500).send(e);
@@ -43,7 +55,7 @@ router.get("/tasks/:id", auth, async (req, res) => {
   }
 });
 
-router.patch("/tasks/:id", auth,async (req, res) => {
+router.patch("/tasks/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
 
   const allowedUpdates = ["description", "completed"];
@@ -70,14 +82,14 @@ router.patch("/tasks/:id", auth,async (req, res) => {
     //   new: true,
     //   runValidators: true,
     // });
-   
+
     res.send(task);
   } catch (e) {
     res.status(400).send(e);
   }
 });
 
-router.delete("/tasks/:id", auth,async (req, res) => {
+router.delete("/tasks/:id", auth, async (req, res) => {
   try {
     // const task = await Task.findByIdAndDelete(req.params.id);
     const task = await Task.findOneAndDelete({
