@@ -27,20 +27,23 @@ const sendWelcomeEmail = (email, name) => {
   });
 };
 
-// const mailOptions = {
-//   from: "nebaj52857@galotv.com",
-//   to: "nebaj52857@galotv.com",
-//   subject: "Testing",
-//   text: "Gello there",
-// };
-// transport.sendMail(mailOptions, function (error, info) {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log("Email sent" + info.messageId);
-//   }
-// });
+const sendCancelationEmail = (email, name) => {
+  const mailOptions = {
+    from: "pirir19465@aregods.com",
+    to: email,
+    subject: "Sorry to see you go!",
+    text: `Goodbye ,${name} . I  hope see you back sometime soon. `,
+  };
+  transport.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent" + info.messageId);
+    }
+  });
+};
 
 module.exports = {
   sendWelcomeEmail,
+  sendCancelationEmail,
 };
