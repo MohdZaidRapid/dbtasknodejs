@@ -14,7 +14,7 @@ const sendWelcomeEmail = (email, name) => {
   const mailOptions = {
     from: "pirir19465@aregods.com",
     to: email,
-    subject: "Testing",
+    subject: "Sending testing mail",
     text: `Welcome to the app ${name} ,name .Let me know how you get along with the app`,
   };
 
