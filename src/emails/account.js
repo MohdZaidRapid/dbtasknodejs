@@ -20,9 +20,9 @@ const sendWelcomeEmail = (email, name) => {
 
   transport.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log(error);
+      return error;
     } else {
-      console.log("Email sent" + info.messageId);
+      return `emai sent ${info.accepted}`;
     }
   });
 };
